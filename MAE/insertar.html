@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Registro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid;
+      border-radius: 5px;
+    }
+    input, select {
+      display: block;
+      margin-bottom: 10px;
+      width: 95%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid ;
+      border-radius: 5px;
+      background-color: gray;
+      color: white;
+    }
+    label
+    {
+        color: green;
+    }
+    input[type="submit"], input[type="reset"] {
+      background-color: pink;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: auto;
+      display: inline-block; 
+      margin-right: 10px; 
+    }
+    input[type="submit"]:hover, input[type="reset"]:hover {
+      background-color: pink;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #007BFF;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+      color: purple;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <h1>Formulario de Registro</h1>
+  <form action="insertar.php" method="POST">
+    <label for="ID">ID de Usuario:</label>
+    <input type="text" id="ID" name="ID" maxlength="4">
+
+    <label for="Nombre">Nombre:</label>
+    <input type="text" id="Nombre" name="Nombre" maxlength="50">
+
+    <label for="Apellido_P">Apellido Paterno:</label>
+    <input type="text" id="Apellido_P" name="Apellido_P" maxlength="20">
+
+    <label for="Apellido_M">Apellido Materno:</label>
+    <input type="text" id="Apellido_M" name="Apellido_M" maxlength="20">
+
+    <label for="Edad">Edad:</label>
+    <input type="text" id="Edad" name="Edad">
+
+    <label for="NumeroTelefonico">Numero Telefonico:</label>
+    <input type="text" id="NumeroTelefonico" name="NumeroTelefonico" maxlength="10">
+
+    <label for="Localidad">Localidad:</label>
+    <input type="text" id="Localidad" name="Localidad" maxlength="100">
+
+    <label for="IDMaquina">ID de Maquina:</label>
+    <input type="text" id="IDMaquina" name="IDMaquina" maxlength="5">
+
+    <input type="submit" value="Registrar">
+    <input type="reset" value="Limpiar">
+  </form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+#include "DHT.h"
+#include <SPI.h>
+#include <Ethernet.h>
+
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+
+#define DHTPIN 2 //Este es el pin que tiene que dejar por default
+#define DHTTYPE DHT11 //Este valor permite hacer la conexion con HTTP con el DHT11
+
+DHT dht(DHTPIN, DHTTYPE);
+
+float humidityData;
+float temperatureData;
+
+char server[] = "127.0.0.1"; 
+IPAddress ip(192, 168, 1, 140); //Cambias esta IP por el que tienes en tu dispositivo
+EthernetClient client;
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+  
+  if (Ethernet.begin(mac) == 0) {
+    Serial.println("Fallo de conexion Ethernet por DHCP");
+    Ethernet.begin(mac, ip);
+  }
+  
+  delay(1000);
+}
+
+void loop() {
+  delay(10000);
+
+  humidityData = dht.readHumidity();
+  temperatureData = dht.readTemperature();
+  Datos_phpmyadmin();
+  
+  delay(5000);
+}
+
+void Datos_phpmyadmin() {
+  if (client.connect(server, 80)) //Conecta el cliente con la base de datos 
+  {
+    Serial.println("Conectado");
+    Serial.print("GET /Integrador/MAE/dht.php?humidity=");
+    client.print("GET /Integrador/MAE/dht.php?humidity=");
+    Serial.println(humidityData);
+    client.print(humidityData);
+    client.print("&temperature=");
+    Serial.println("&temperature=");
+    client.print(temperatureData);
+    Serial.println(temperatureData);
+    client.print(" ");
+    client.print("HTTP/1.1");
+    client.println();
+    client.println("Host: 192.168.1.140"); //Cambia esta IP con la que tienes en tu dispositivo
+    client.println();
+  } else {
+    Serial.println("Conexion fallida");
+  }
+}
